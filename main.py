@@ -1,5 +1,6 @@
 
 import random
+from select import select
 
 
 
@@ -7,10 +8,19 @@ import random
 
 
 
-destinations_list = ["Buffalo", "Syracuse", "Albany", "Manhatten", "Boston", "Baltimore", "Myrtle Beach", "Miami", "Houston"]
-restaurants_list = ["Anchor Bar", "Pies Guys", "Carrabba's", "Minetta Tavern", "The Smith", "Carmine's", "Ms. Cheezious", "KOMODO", "Coyo Taco", "The Pit Room", "Pinkerton's Barbecue"]
-mode_of_transportation_list = ["Car", "Private Jet", "Walk", "Motorcycle", "Bicycle", "Limo", "Train", "Boat"]
-entertainment_list = ["Comedy Show", "Mall", "Parkour", "Museum", "Live Music", "Beach", "Rent Jet Skis", "Go-Karts", "Mini-Golf", "Park"]
+destinations = ["Buffalo", "Syracuse", "Albany", "Manhatten", "Boston", "Baltimore", "Myrtle Beach", "Miami", "Houston"]
+restaurants = ["Anchor Bar", "Pies Guys", "Carrabba's", "Minetta Tavern", "The Smith", "Carmine's", "Ms. Cheezious", "KOMODO", "Coyo Taco", "The Pit Room", "Pinkerton's Barbecue"]
+mode_of_transportation = ["Car", "Private Jet", "Walk", "Motorcycle", "Bicycle", "Limo", "Train", "Boat"]
+entertainment = ["Comedy Show", "Mall", "Parkour", "Museum", "Live Music", "Beach", "Rent Jet Skis", "Go-Karts", "Mini-Golf", "Park"]
+
+day_trip_generator = [destinations, restaurants, mode_of_transportation, entertainment]
+
+def greeting():
+    print("""
+                Day Trip Generator
+            """)
+greeting()
+
 
 def select_destinations(destination_list):
     confirm_bool = True
@@ -23,8 +33,10 @@ def select_destinations(destination_list):
             confirm_bool = False
     return selected_destination
 
-winner = select_destinations(destinations_list)
-print(f"{winner} it is!")
+chosen_destination = select_destinations(destinations)   
+print(f"{chosen_destination} it is!")
+
+
 
 def select_restaurant(restaurants_list):
     confirm_bool = True
@@ -37,8 +49,8 @@ def select_restaurant(restaurants_list):
             confirm_bool = False
     return selected_restaurant
 
-winner = select_restaurant(restaurants_list)
-print(f"{winner} it is!")
+chosen_restaurant = select_restaurant(restaurants)
+print(f"{chosen_restaurant} it is!")
 
 def select_mode_of_transportation(mode_of_transportation_list):
     confirm_bool = True
@@ -51,8 +63,8 @@ def select_mode_of_transportation(mode_of_transportation_list):
             confirm_bool = False
     return selected_mode_of_transportation
 
-winner = select_mode_of_transportation(mode_of_transportation_list)
-print(f"{winner} it is!")
+chosen_mode_of_transportation = select_mode_of_transportation(mode_of_transportation)
+print(f"{chosen_mode_of_transportation} it is!")
 
 def select_entertainment(entertainment_list):
     confirm_bool = True
@@ -65,5 +77,47 @@ def select_entertainment(entertainment_list):
             confirm_bool = False
     return selected_entertainment
 
-winner = select_entertainment(entertainment_list)
-print(f"{winner} it is!")
+chosen_entertainment = select_entertainment(entertainment)
+print(f"{chosen_entertainment} it is!")
+
+
+def day_trip_questions():
+    chosen_destination = select_destinations(destinations)
+    chosen_restaurant = select_restaurant(restaurants)
+    chosen_mode_of_transportation = select_mode_of_transportation(mode_of_transportation)
+    chosen_entertainment = select_entertainment(entertainment)
+
+
+choices_list = [chosen_destination, chosen_restaurant, chosen_mode_of_transportation, chosen_entertainment]
+
+def displaying_choices(choices_list):
+    for choices in choices_list:
+        print(choices)
+
+
+def confirm_choices():
+    conf_bool = True
+    while conf_bool:
+        user_input = input("Are you satisfied with these choices? (Type Yes or No) : ")
+        if user_input  == "Yes":
+            print(f"You have chosen {chosen_destination} for your destination, {chosen_restaurant} for your restaurant, {chosen_mode_of_transportation} as your mode of transportation and {chosen_entertainment} as your entertainment. Enjoy your adventure!" )
+            break
+        if user_input == "No":
+            day_trip_questions()
+            continue
+        else:
+            print("Invalid selection. Please try again." )
+
+
+
+def run_confirmation_sequence(day_trip_generator):
+    displaying_choices(choices_list)
+    confirm_choices()
+    
+
+
+
+run_confirmation_sequence(day_trip_generator)
+
+
+
