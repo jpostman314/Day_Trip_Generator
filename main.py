@@ -17,7 +17,7 @@ day_trip_generator = [destinations, restaurants, mode_of_transportation, enterta
 
 def greeting():
     print("""
-                                                                                            Day Trip Generator
+                                                            Day Trip Generator
             """)
     print("This program will randomly select a destination, restaurant, mode of transportation and form of entertainment to create a random day trip for you to enjoy! Once each selection has been chosen at random, you will be able to accept or deny that choice. I hope you enjoy the adventure the Day Trip Generator creates for you!!")
     print("")
